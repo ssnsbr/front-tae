@@ -1,6 +1,6 @@
 // "use client"
 import React from "react";
-import { user_url } from "@/api/globalurls";
+import { user_url } from "@/api/global-urls";
 import axios from "axios";
 import SessionData from "./session-data";
 import { getServerSession } from "next-auth";
@@ -8,7 +8,6 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
 
 const ProfilePage = async () => {
   const session = await getServerSession(authOptions);
-  // console.log("in-getServerSession-session:", session);
 
   const response = await axios(user_url, {
     headers: {

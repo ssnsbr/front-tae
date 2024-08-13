@@ -1,15 +1,13 @@
-import { products_list_url, single_product_url } from "@/api/globalurls";
-import { useFetchProduct } from "@/api/product-detail";
-import { ProductType } from "@/api/types";
+import { single_product_url } from "@/api/global-urls";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import AddtocartButtonList from "../addtocartlist";
 
 // export async function getServerSideProps(params: any) {
 //   const slug = params.query.id;
 //   console.log(`getting ${singleproducturl}${slug}`);
 //   const { data: response } = await axios.get(`${singleproducturl}${slug}`);
 //   console.log(response);
-
 //   return { props: { data: response} };
 // }
 interface iProps {
@@ -17,6 +15,8 @@ interface iProps {
 }
 
 const Product = async (params: iProps) => {
+  const [adata, setData] = useState<any | null>(null);
+
   const slug = params.params.id;
   console.log(`getting! ${params}`);
 
@@ -73,12 +73,7 @@ const Product = async (params: iProps) => {
               </div>
             </div>
 
-            <button
-              type="submit"
-              className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-            >
-              Add to bag
-            </button>
+            <AddtocartButtonList product_id={data} />
           </div>
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
             {/* Description and details */}

@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Layout from "@/app/layout";
-import { login_url } from "@/api/globalurls";
+import { login_url } from "@/api/global-urls";
 
 const page = () => {
   const { status } = useSession();

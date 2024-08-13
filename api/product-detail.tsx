@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ProductType } from "./types";
-import { single_product_url } from "./globalurls";
+import { single_product_url } from "./global-urls";
 
 type FetchProductResult = {
   data: ProductType;

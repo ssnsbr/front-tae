@@ -11,4 +11,7 @@ export const register_url: string = auth + "registration/";
 
 export const password_change_url: string = auth + "password/change/";
 export const password_reset_url: string = auth + "password/reset/";
-export const password_reset_confirm_url: string = auth + "password/reset/confirm/";
+export const password_reset_confirm_url: string =
+  auth + "password/reset/confirm/";
+
+export const cart_item_url: string = root + "api/cart/cart-items/";

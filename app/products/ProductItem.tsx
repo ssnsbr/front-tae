@@ -1,4 +1,4 @@
-import { single_product_url } from "@/api/globalurls";
+import { single_product_url } from "@/api/global-urls";
 import { ProductType } from "@/api/types";
 import { Avatar, Box, Button, Card, Flex, Link, Text } from "@radix-ui/themes";
 import { Description } from "@radix-ui/themes/src/components/alert-dialog.jsx";
@@ -29,7 +29,7 @@ const ProductItem = ({ name, id, price, description }: ProductType) => {
                 {name}
               </Text> */}
                 <Text as="div" size="2" color="gray">
-                  {description}
+                  {/* {description} */}
                 </Text>
               </Box>
               <p className="mt-1 text-lg font-medium text-gray-900">{price}</p>

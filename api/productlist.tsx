@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { products_list_url, single_product_url } from "./globalurls";
+import { products_list_url, single_product_url } from "./global-urls";
 import { ProductType } from "./types";
 
 type FetchProductListResult = {

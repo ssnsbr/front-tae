@@ -15,7 +15,7 @@ import {
   Skeleton,
   Text,
 } from "@radix-ui/themes";
-import { login_url, logout_url } from "@/api/globalurls";
+import { login_url, logout_url } from "@/api/global-urls";
 
 const NavBar = () => {
   return (

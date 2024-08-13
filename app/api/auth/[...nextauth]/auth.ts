@@ -1,5 +1,5 @@
 import CredentialsProvider from "next-auth/providers/credentials";
-import { login_url } from "@/api/globalurls";
+import { login_url } from "@/api/global-urls";
 import axios from "axios";
 import type { NextAuthOptions } from "next-auth";
 import Auth0Provider from "next-auth/providers/auth0";
