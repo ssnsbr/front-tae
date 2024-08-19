@@ -2,6 +2,9 @@ export const root: string = "http://127.0.0.1:8000/";
 
 export const products_list_url: string = root + "api/product/";
 export const single_product_url: string = root + "api/product/";
+export const product_media_url: string = root + "api/product/media/";
+export const vendor_product_url: string = root + "api/vendorproducts/";
+
 
 const auth: string = root + "api/dj-rest-auth/";
 export const user_url: string = root + "api/dj-rest-auth/user/";
@@ -15,3 +18,6 @@ export const password_reset_confirm_url: string =
   auth + "password/reset/confirm/";
 
 export const cart_item_url: string = root + "api/cart/cart-items/";
+
+export const refresh_token_url: string =
+  root + "api/dj-rest-auth/token/refresh/";

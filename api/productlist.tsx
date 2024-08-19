@@ -14,13 +14,12 @@ export const useFetchProductList = (): FetchProductListResult => {
 
   useEffect(() => {
     const fetchData = async () => {
-
       try {
         const { data: response } = await axios.get(products_list_url);
-        console.log(response);
+        console.log("response:", response);
         setData(response);
       } catch (error) {
-        console.error(error);
+        console.error("error:", error);
       }
       setLoading(false);
     };

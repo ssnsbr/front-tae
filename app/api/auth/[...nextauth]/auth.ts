@@ -16,11 +16,6 @@ export const authOptions: NextAuthOptions = {
     maxAge: BACKEND_REFRESH_TOKEN_LIFETIME,
   },
   providers: [
-    Auth0Provider({
-      clientId: process.env.AUTH0_CLIENT_ID,
-      clientSecret: process.env.AUTH0_CLIENT_SECRET,
-      issuer: process.env.AUTH0_ISSUER,
-    }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: "Credentials",
@@ -81,10 +76,21 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      console.log("auth", "redirect", url, baseUrl);
+      // These conditions redirect user after a successful login
+      if (url.startsWith("/")) return `${baseUrl}${url}`;
+      else if (new URL(url).origin === baseUrl) return url;
+
+      return baseUrl;
+    },
+
     // async jwt function recieve this data (const data = await response.json()) as user, and then I return { ...token, ...user } from this function.
     // Requests to /api/auth/signin, /api/auth/session and calls to getSession(), getServerSession(), useSession() will invoke this function, but only if you are using a JWT session. This method is not invoked when you persist sessions in a database.
 
     async jwt({ user, token }) {
+      console.log("auth", "jwt", user, token);
+
       // JSON Web Token is created (i.e. at sign in) or updated (i.e whenever a session is accessed in the client).
       // The arguments user, account, profile and isNewUser are only passed
       //          the first time this callback is called on a new session, after the user signs in.
@@ -99,6 +105,7 @@ export const authOptions: NextAuthOptions = {
         token.access_token = user.access;
         token.refresh_token = user.refresh;
         token.ref = getCurrentEpochTime() + BACKEND_ACCESS_TOKEN_LIFETIME;
+        // axiosInstance.defaults.headers.common.Authorization = `Bearer ${token.accessToken}`
       }
       // Set the user in the token so that If not new sign in then user=null and data is in token:
       // console.log("------------------------------------jwt-token:", token); // always
@@ -109,10 +116,18 @@ export const authOptions: NextAuthOptions = {
     // since this token is my jwt returned from django I put this token is the session (session.user.token = token) and then return the session. This session is available in our next application.
 
     async session({ session, token }) {
+      console.log("auth", "session", session, token);
+
       // console.log("------------------------------------session-token:", token);
       // console.log("------------------------------------session-session:", session);
       // When using database sessions, the User (user) object is passed as an argument.
       // When using JSON Web Tokens for sessions, the JWT payload (token) is provided instead.
+      // if (token){
+      //   session.user.id = token.sub!
+      //   session.token = token.accessToken
+
+      //   axiosInstance.defaults.headers.common.Authorization = `Bearer ${token.accessToken}`
+      // }
       session.token = token.access_token;
       session.refresh = token.refresh_token;
       session.user = token.user;

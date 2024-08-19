@@ -1,28 +1,27 @@
-// "use client"
 import React from "react";
 import { user_url } from "@/api/global-urls";
-import axios from "axios";
-import SessionData from "./session-data";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/auth";
+import useAxiosAuth from "@/lib/hooks/useAxiosAuth";
+import ApiClient from "@/lib/axiosInstance";
+import { AuthGetApi } from "@/lib/fetchApi";
 
 const ProfilePage = async () => {
-  const session = await getServerSession(authOptions);
-
-  const response = await axios(user_url, {
-    headers: {
-      Authorization: "Bearer " + session?.token,
-    },
-  }).catch((e) => console.log("e"));
-  const data = response?.data;
+  // const session = await getServerSession(authOptions);
+  const data = await AuthGetApi(user_url);
+  // const response = await axiosAuth.get(
+  // user_url
+  //  {
+  // headers: {
+  //   Authorization: "Bearer " + session?.token,
+  // },
+  // }
+  // )
+  // .catch((e) => console.log("e:", e));
   // console.log("res:", data);
   const loading = false;
   return (
     <div>
       {" "}
-      <div>
-        <SessionData session={session} />
-      </div>
+      <div>{/* <SessionData session={session} /> */}</div>
       <div>
         {loading && <div>Loading...</div>}
         {!loading && (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { AiFillBug } from "react-icons/ai";
+import { AiFillBug, AiOutlineSearch } from "react-icons/ai";
 import classNames from "classnames";
 import strings from "../dictionaries/fa.json";
 import {
@@ -14,6 +14,7 @@ import {
   Flex,
   Skeleton,
   Text,
+  TextField,
 } from "@radix-ui/themes";
 import { login_url, logout_url } from "@/api/global-urls";
 
@@ -27,6 +28,7 @@ const NavBar = () => {
               <AiFillBug />
             </Link>
             <NavLinks />
+            <Searchbar />
           </Flex>
           <AuthStatus />
         </Flex>
@@ -34,15 +36,23 @@ const NavBar = () => {
     </nav>
   );
 };
+
+const Searchbar = () => {
+  return (
+    <>
+      <TextField.Root placeholder={strings.Search}>
+        <TextField.Slot>
+          <AiOutlineSearch height="16" width="16" />
+        </TextField.Slot>
+      </TextField.Root>
+    </>
+  );
+};
 const NavLinks = () => {
   const currentPath = usePathname();
-
   const links = [
-    { label: "Dashboard", href: "/" },
-    { label: "Issues", href: "/issues" },
     { label: strings.dashboard, href: "/" },
-    { label: "Issues", href: "/issues" },
-    { label: strings.Products, href: "/product" },
+    { label: strings.Products, href: "/products" },
     { label: strings.Sellers, href: "/seller" },
   ];
 
@@ -73,7 +83,7 @@ const AuthStatus = () => {
   if (status === "unauthenticated") {
     return (
       <Link className="nav-link" href="/api/auth/signin">
-        Login
+        {strings.Login}
       </Link>
     );
   }
@@ -82,12 +92,12 @@ const AuthStatus = () => {
     <div>
       <div>
         <Link className="nav-link" href="/profile">
-          Profile
+          {strings.Profile}
         </Link>
       </div>
       <div>
         <Link className="nav-link" href="/api/auth/signout">
-          signout
+          {strings.Signout}
         </Link>{" "}
       </div>
     </div>

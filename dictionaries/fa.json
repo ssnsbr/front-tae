@@ -1,7 +1,12 @@
 {
-    "Seller" : "فروشنده" ,
-    "Sellers" : "فروشندگان" ,
-    "Product" : "محصول" ,
-    "Products" : "محصولات" ,
-    "dashboard": "داشبورد"
+  "Seller": "فروشنده",
+  "Sellers": "فروشندگان",
+  "Product": "محصول",
+  "Products": "محصولات",
+  "dashboard": "داشبورد",
+  "Login": "ورود",
+  "Signout": "خروج",
+  "Profile": "پروفایل",
+  "Search": "جستجو",
+  "Buy": "خرید"
 }
