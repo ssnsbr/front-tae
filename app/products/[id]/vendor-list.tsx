@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { getSession, useSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../api/auth/[...nextauth]/auth";
-import AddtoCartButton from "./addtocart";
+import AddtoCartButton from "./add-to-cart";
 
 const AddtocartButtonList = ({ vendor_product }: any) => {
   // const { data: session, status } = useSession();

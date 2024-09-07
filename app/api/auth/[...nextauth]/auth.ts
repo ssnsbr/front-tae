@@ -4,6 +4,7 @@ import axios from "axios";
 import type { NextAuthOptions } from "next-auth";
 import Auth0Provider from "next-auth/providers/auth0";
 
+
 const BACKEND_ACCESS_TOKEN_LIFETIME = 45 * 60; // 45 minutes
 const BACKEND_REFRESH_TOKEN_LIFETIME = 6 * 24 * 60 * 60; // 6 days
 const getCurrentEpochTime = () => {
@@ -69,7 +70,7 @@ export const authOptions: NextAuthOptions = {
             return data;
           }
         } catch (error) {
-          console.error("Hello?:", error);
+          console.error("authorize error:", error);
         }
         return null;
       },

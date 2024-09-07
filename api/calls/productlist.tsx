@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { products_list_url, single_product_url } from "./global-urls";
-import { ProductType } from "./types";
+import { products_list_url, single_product_url } from "../global-urls";
+import { ProductType } from "../types";
 
 type FetchProductListResult = {
   data: ProductType[];
@@ -16,7 +16,7 @@ export const useFetchProductList = (): FetchProductListResult => {
     const fetchData = async () => {
       try {
         const { data: response } = await axios.get(products_list_url);
-        console.log("response:", response);
+        // console.log("response:", response);
         setData(response);
       } catch (error) {
         console.error("error:", error);

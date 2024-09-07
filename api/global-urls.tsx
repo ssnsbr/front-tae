@@ -3,8 +3,9 @@ export const root: string = "http://127.0.0.1:8000/";
 export const products_list_url: string = root + "api/product/";
 export const single_product_url: string = root + "api/product/";
 export const product_media_url: string = root + "api/product/media/";
-export const vendor_product_url: string = root + "api/vendorproducts/";
-
+export const product_detail_url: string = root + "api/product/";
+export const vendors_url: string = root + "api/vendor/";
+export const vendor_detail_url: string = root + "api/vendor/";
 
 const auth: string = root + "api/dj-rest-auth/";
 export const user_url: string = root + "api/dj-rest-auth/user/";

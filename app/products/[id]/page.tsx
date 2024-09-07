@@ -1,4 +1,4 @@
-import { product_media_url, single_product_url, vendor_product_url } from "@/api/global-urls";
+import { product_media_url, single_product_url, product_detail_url } from "@/api/global-urls";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddtocartButtonList from "./vendor-list";
@@ -32,7 +32,7 @@ const Product = async (params: iProps) => {
   );
 
   const { data: vendor_product } = await axios.get(
-    `${vendor_product_url}${slug}`
+    `${product_detail_url}${slug}/vp`
   );
   // console.log("vendor_product:",vendor_product);
 

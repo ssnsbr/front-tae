@@ -11,10 +11,9 @@ const ApiClient = () => {
     axiosAuth.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   };
 
+  // Before a request is sent, the interceptor checks for a token
   axiosAuth.interceptors.request.use(async (config) => {
     if (config.headers.Authorization) return config;
-    console.log("axiosInstance:");
-
     // const session = await getServerSession(authOptions);
     const session = await getSession();
     const accessToken = session?.token;
@@ -24,6 +23,7 @@ const ApiClient = () => {
 
       config.headers.Authorization = authHeaderValue;
       axiosAuth.defaults.headers.common.Authorization = authHeaderValue;
+
       console.log("axiosInstance:", "authHeaderValue:", authHeaderValue);
     } else {
       console.log("axiosInstance:", "authHeaderValue:", "No Session!");
@@ -32,7 +32,8 @@ const ApiClient = () => {
   });
 
   // Axios Interceptor: Response Method
-
+  // After a response is received, the interceptor can modify it if needed.
+  // Any errors during the response can be handled globally.
   axiosAuth.interceptors.response.use(
     (response) => {
       // Can be modified response
@@ -41,8 +42,8 @@ const ApiClient = () => {
     async (error: AxiosError) => {
       //   toast.error("expired session");
 
-      axiosAuth.defaults.headers.common.Authorization = undefined;
-      await signOut({ callbackUrl: "/" });
+      // axiosAuth.defaults.headers.common.Authorization = undefined;
+      // await signOut({ callbackUrl: "/" });
 
       return Promise.reject(error);
     }
