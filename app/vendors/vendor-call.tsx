@@ -7,8 +7,16 @@ const getVendorDetail = async (id: any) => {
 };
 
 export const getVendorsList = async () => {
-  let data = await fetch(`${vendors_url}`);
-  return await data.json();
+  try {
+    let response = await fetch(`${vendors_url}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Failed to fetch vendors:", error);
+    return []; // Return an empty array or handle error appropriately
+  }
 };
 
 export default getVendorDetail;
