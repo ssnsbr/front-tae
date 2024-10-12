@@ -1,7 +1,7 @@
 import "@radix-ui/themes/styles.css";
 import "./theme-config.css";
 import "./globals.css";
-
+export const runtime = "edge";
 import { Inter, Noto_Sans_Arabic } from "next/font/google";
 import Navbar from "./Navbar";
 import { Theme, ThemePanel } from "@radix-ui/themes";
