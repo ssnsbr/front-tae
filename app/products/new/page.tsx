@@ -21,43 +21,44 @@ const NewProductPage = () => {
   const [error, setError] = useState("");
 
   return (
-    <div className="max-w-xl space-y-2">
-      {error && (
-        <Callout.Root color="red" className="mb-4">
-          <Callout.Text>{error}</Callout.Text>
-        </Callout.Root>
-      )}
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            await axios.post("/api/products", data);
-            router.push("/product");
-          } catch (error) {
-            setError("error occured!");
-          }
-        })}
-      >
-        <Controller
-          name="title"
-          control={control}
-          render={({ field }) => (
-            <TextField.Root placeholder="Title" {...field}>
-              <TextField.Slot></TextField.Slot>
-            </TextField.Root>
-          )}
-        />
+    <></>
+    // <div className="max-w-xl space-y-2">
+    //   {error && (
+    //     <Callout.Root color="red" className="mb-4">
+    //       <Callout.Text>{error}</Callout.Text>
+    //     </Callout.Root>
+    //   )}
+    //   <form
+    //     onSubmit={handleSubmit(async (data) => {
+    //       try {
+    //         await axios.post("/api/products", data);
+    //         router.push("/product");
+    //       } catch (error) {
+    //         setError("error occured!");
+    //       }
+    //     })}
+    //   >
+    //     <Controller
+    //       name="title"
+    //       control={control}
+    //       render={({ field }) => (
+    //         <TextField.Root placeholder="Title" {...field}>
+    //           <TextField.Slot></TextField.Slot>
+    //         </TextField.Root>
+    //       )}
+    //     />
 
-        <Controller
-          name="description"
-          control={control}
-          render={({ field }) => (
-            <SimpleMDE placeholder="Description" {...field} />
-          )}
-        />
+    //     <Controller
+    //       name="description"
+    //       control={control}
+    //       render={({ field }) => (
+    //         <SimpleMDE placeholder="Description" {...field} />
+    //       )}
+    //     />
 
-        <Button>Submit New Product </Button>
-      </form>
-    </div>
+    //     <Button>Submit New Product </Button>
+    //   </form>
+    // </div>
   );
 };
 

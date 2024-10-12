@@ -6,30 +6,30 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Layout from "@/app/layout";
 import { login_url } from "@/api/global-urls";
 
-const page = () => {
-  const { status } = useSession();
-  if (status === "loading") {
-    return "Loading or not authenticated...";
-  }
+// const page = () => {
+//   const { status } = useSession();
+//   if (status === "loading") {
+//     return "Loading or not authenticated...";
+//   }
 
-  return <div>Signed on</div>;
-};
+//   return <div>Signed on</div>;
+// };
 
-export async function postData(url = "", data = {}) {
-  const response = await fetch(url, {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: JSON.stringify(data),
-  });
-  return response.json();
-}
+// export async function postData(url: string = "", data: {} = {}): Promise<any> {
+//   const response = await fetch(url, {
+//     method: "POST",
+//     mode: "cors",
+//     cache: "no-cache",
+//     credentials: "same-origin",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     redirect: "follow",
+//     referrerPolicy: "no-referrer",
+//     body: JSON.stringify(data),
+//   });
+//   return response.json();
+// }
 
 type FormValues = {
   email: string;
@@ -48,12 +48,27 @@ const LoginPage = () => {
     console.log("We are onSubmit!");
     console.log(data);
 
-    const res = await postData(`${login_url}`, {
-      email: data.email,
-      password: data.password,
+    // const res = await postData(`${login_url}`, {
+    //   email: data.email,
+    //   password: data.password,
+    // });
+    const res = await fetch(`${login_url}`, {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify({
+        email: data.email,
+        password: data.password,
+      }),
     });
-    
-    console.log("This is the res of postData:",res);
+    console.log("This is the res of postData:",res.json());
+    res.json()
   };
 
   return (

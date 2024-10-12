@@ -102,6 +102,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         // change token
         // token = { accessToken: user.accessToken };
+
         token.user = user.user;
         token.access_token = user.access;
         token.refresh_token = user.refresh;
@@ -129,8 +130,11 @@ export const authOptions: NextAuthOptions = {
 
       //   axiosInstance.defaults.headers.common.Authorization = `Bearer ${token.accessToken}`
       // }
-      session.token = token.access_token;
-      session.refresh = token.refresh_token;
+      console.log("---------------------------------------------------------")
+      console.log("---------------------------------------------------------")
+      console.log(session)
+      // session.token = token.access_token;
+      // session.refresh = token.refresh_token;
       session.user = token.user;
       // console.log("----------------------session-session-out:", session);
       // return session;

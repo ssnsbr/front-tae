@@ -13,12 +13,11 @@ async function refreshToken(refreshToken: string) {
     }),
   });
   const rdata = await res;
+
   console.log("rdata:",rdata);
   const data = rdata.json();
-
-  console.log({ data });
-
-  return data.accessToken;
+  data.then((result) => console.log("data::result: ", result));
+  return data;
 }
 
 export async function AuthGetApi(url: string) {

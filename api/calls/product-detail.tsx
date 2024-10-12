@@ -17,6 +17,8 @@ export const useFetchProduct = (id: string): FetchProductResult => {
     description: "",
     price: "",
     category: "",
+    data: "",
+    first_image : "",
   });
 
   const [loading, setLoading] = useState(true);
