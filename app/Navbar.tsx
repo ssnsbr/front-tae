@@ -2,58 +2,58 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { AiFillBug, AiOutlineSearch } from "react-icons/ai";
+import { SunIcon, MoonIcon } from "@radix-ui/react-icons";
+import { Container, Flex, Skeleton, TextField } from "@radix-ui/themes";
 import classNames from "classnames";
 import strings from "../dictionaries/fa.json";
-import {
-  Avatar,
-  Box,
-  Container,
-  DropdownMenu,
-  Flex,
-  Skeleton,
-  Text,
-  TextField,
-} from "@radix-ui/themes";
-import { login_url, logout_url } from "@/api/global-urls";
+import Searchbar from "./Searchbar";
+import ThemeToggle from "./ThemeToggle";
 
 const NavBar = () => {
+  const [isDark, setIsDark] = useState(false);
+
+  // Load theme preference from localStorage and apply it
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") setIsDark(true);
+  }, []);
+
+  // Save theme preference when toggled
+  useEffect(() => {
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+    document.documentElement.classList.toggle("dark-theme", isDark);
+  }, [isDark]);
+
   return (
-    <nav className="border-b mb-5 px-5 py-3">
+    <nav className="border-b mb-5 px-5 py-4 shadow-sm">
       <Container>
-        <Flex justify="between">
-          <Flex align="center" gap="3">
-            <Link href="/">
-              <AiFillBug />
+        <Flex justify="between" align="center">
+          <Flex align="center" gap="4">
+            <Link href="/" className="text-2xl font-bold flex items-center">
+              <AiFillBug className="mr-2" />
+              BrandName
             </Link>
             <NavLinks />
-            <Searchbar />
+            {/* <ThemeToggle /> */}
+
           </Flex>
-          <AuthStatus />
+          <Flex align="center" gap="4">
+            <Searchbar />
+            <AuthStatus />
+          </Flex>
         </Flex>
       </Container>
     </nav>
   );
 };
 
-const Searchbar = () => {
-  return (
-    <>
-      <TextField.Root placeholder={strings.Search}>
-        <TextField.Slot>
-          <AiOutlineSearch height="16" width="16" />
-        </TextField.Slot>
-      </TextField.Root>
-    </>
-  );
-};
 const NavLinks = () => {
   const currentPath = usePathname();
   const links = [
-    { label: strings.dashboard, href: "/" },
     { label: strings.Products, href: "/products" },
-    { label: strings.Sellers, href: "/seller" },
+    { label: strings.Sellers, href: "/vendors" },
   ];
 
   return (
@@ -61,11 +61,12 @@ const NavLinks = () => {
       {links.map((link) => (
         <li key={link.href}>
           <Link
-            className={classNames({
-              "nav-link": true,
-              "!text-zinc-900": link.href === currentPath,
-            })}
             href={link.href}
+            className={classNames("font-medium transition-colors", {
+              "text-blue-600 dark:text-blue-400": link.href === currentPath,
+              "text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white":
+                link.href !== currentPath,
+            })}
           >
             {link.label}
           </Link>
@@ -77,14 +78,14 @@ const NavLinks = () => {
 
 const AuthStatus = () => {
   const { status, data: session } = useSession();
-  console.log("AuthStatus", session);
-  console.log("AuthStatus", status);
 
   if (status === "loading") return <Skeleton width="3rem" />;
-
   if (status === "unauthenticated") {
     return (
-      <Link className="nav-link" href="/api/auth/signin">
+      <Link
+        href="/api/auth/signin"
+        className="font-medium text-blue-600 hover:text-blue-800"
+      >
         {strings.Login}
       </Link>
     );
@@ -92,16 +93,18 @@ const AuthStatus = () => {
 
   return (
     <div>
-      <div>
-        <Link className="nav-link" href="/profile">
-          {strings.Profile}
-        </Link>
-      </div>
-      <div>
-        <Link className="nav-link" href="/api/auth/signout">
-          {strings.Signout}
-        </Link>{" "}
-      </div>
+      <Link
+        href="/profile"
+        className="font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+      >
+        {strings.Profile}
+      </Link>
+      <Link
+        href="/api/auth/signout"
+        className="ml-3 font-medium text-blue-600 hover:text-blue-800"
+      >
+        {strings.Signout}
+      </Link>
     </div>
   );
 };

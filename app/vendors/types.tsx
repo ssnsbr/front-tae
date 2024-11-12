@@ -5,6 +5,7 @@ export type VendorType = {
   store_bio: string;
   contact_number: string;
   owner: number;
+  avatar_url: string;
 };
 
 export interface iProps {

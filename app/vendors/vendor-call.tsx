@@ -1,9 +1,18 @@
 import { vendor_detail_url, vendors_url } from "@/api/global-urls";
-// import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { VendorType } from "./types";
 
-const getVendorDetail = async (id: any) => {
-  return await axios.get(`${vendor_detail_url}${id}`);
+// Fetch vendor detail by ID
+export const getVendorDetail = async (
+  id: number | string
+): Promise<VendorType | null> => {
+  try {
+    const response = await axios.get<VendorType>(`${vendor_detail_url}${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Failed to fetch vendor detail for ID ${id}:`, error);
+    return null; // Return null if the detail could not be fetched
+  }
 };
 
 export const getVendorsList = async () => {

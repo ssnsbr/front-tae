@@ -4,31 +4,30 @@ import { Avatar, Box, Button, Card, Flex, Link, Text } from "@radix-ui/themes";
 import React from "react";
 import strings from "@/dictionaries/fa.json";
 import { AiFillFileImage } from "react-icons/ai";
-const ProductItem = ({
-  name,
-  id,
-  price,
-  description,
-  first_image,
-}: ProductType) => {
+
+interface ProductItemProps {
+  product: ProductType;
+}
+
+const ProductItem: React.FC<ProductItemProps> = ({ product }) => {
   return (
     <div>
       <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
         <Box maxWidth="540px">
           {/* <Link href={singleproducturl+{id}} > */}
-          <Link href={`/products/${id}`}>
+          <Link href={`/products/${product.id}`}>
             <Card>
               <Flex gap="3" align="center">
                 <Avatar
                   className="h-fu ll w-full object-cover object-center group-hover:opacity-75"
                   size="8"
                   radius="full"
-                  src={root + first_image.image_url}
+                  src={root + product.first_image.image_url}
                   fallback={<AiFillFileImage />}
                 ></Avatar>
               </Flex>
               <Box>
-                <h3 className="mt-4 text-sm text-gray-700">{name}</h3>
+                <h3 className="mt-4 text-sm text-gray-700">{product.name}</h3>
                 {/*             
               <Text as="div" size="2" weight="bold">
                 {name}
@@ -37,7 +36,9 @@ const ProductItem = ({
                   {/* {description} */}
                 </Text>
               </Box>
-              <p className="mt-1 text-lg font-medium text-gray-900">{price}</p>
+              <p className="mt-1 text-lg font-medium text-gray-900">
+                {product.price}
+              </p>
 
               <Button> {strings.Buy}</Button>
             </Card>

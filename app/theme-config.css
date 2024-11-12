@@ -1,3 +1,55 @@
-.radix-themes {
-  --default-font-family: var(--font-inter);
+/* Default (light) theme */
+:root {
+  --background-color: #f9f9fb;
+  --text-color: #333;
+  --button-bg-color: #4f46e5;
+  --button-hover-bg-color: #3b3a99;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --button-bg-color: #3b3a99;
+  --button-hover-bg-color: #4f46e5;
+}
+
+.theme-wrapper {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.toggle-button {
+  background-color: var(--button-bg-color);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.toggle-button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+
+:root {
+  --navbar-light-bg: #ffffff;
+  --navbar-dark-bg: #1a1a1a;
+  --navbar-link-color: #4a5568;
+}
+
+.dark-theme {
+  background-color: var(--navbar-dark-bg);
+  color: white;
+}
+
+.nav-link {
+  color: var(--navbar-link-color);
+  transition: color 0.2s;
+}
+
+.dropdown-link:hover {
+  background-color: #f3f4f6;
+  color: #374151;
 }

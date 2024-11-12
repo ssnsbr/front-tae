@@ -6,11 +6,15 @@ import { Inter, Noto_Sans_Arabic } from "next/font/google";
 import Navbar from "./Navbar";
 import { Theme, ThemePanel } from "@radix-ui/themes";
 import AuthProvider from "@/app/AuthProvider";
+import React from "react";
+import ThemeToggle from "./ThemeToggle";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const notoSansArabic = Noto_Sans_Arabic({
   subsets: ["arabic"],
   display: "swap",
+  variable: "--font-noto-arabic",
+
   // adjustFontFallback: false, // 👈
 });
 
@@ -34,14 +38,14 @@ export default async function RootLayout({
   // const serverSession = await auth();
   // console.log("serverSession", serverSession);
   return (
-    <html lang="en">
-      <body className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${notoSansArabic.variable}`}>
+      <body className="font-sans">
         <AuthProvider>
-          <Theme accentColor="plum" grayColor="mauve" radius="large">
+          <ThemeToggle>
             <Navbar />
-            <main className="menu-container p-5">{children}</main>
-            {/* <ThemePanel/> */}
-          </Theme>
+            <main className="menu-container p-1">{children}</main>
+            {/* <ThemePanel /> Optional: Remove in production */}
+          </ThemeToggle>  
         </AuthProvider>
       </body>
     </html>

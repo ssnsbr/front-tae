@@ -1,9 +1,14 @@
-import { product_media_url, single_product_url, product_detail_url } from "@/api/global-urls";
+import {
+  product_media_url,
+  single_product_url,
+  product_detail_url,
+} from "@/api/global-urls";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AddtocartButtonList from "./vendor-list";
 import Slider from "react-slick";
 import ImageSlider from "./image-slider";
+import getProductMediaList from "./product-media-call";
 
 // export async function getServerSideProps(params: any) {
 //   const slug = params.query.id;
@@ -27,15 +32,12 @@ const Product = async (params: iProps) => {
   const data = response;
 
   // vendor-producta
-  const { data: product_media } = await axios.get(
-    `${product_media_url}${slug}`
-  );
+  const product_media = getProductMediaList(slug);
 
   const { data: vendor_product } = await axios.get(
     `${product_detail_url}${slug}/vp`
   );
   // console.log("vendor_product:",vendor_product);
-
 
   return (
     <div>
@@ -83,7 +85,6 @@ const Product = async (params: iProps) => {
               </div>
             </div>
             <ImageSlider images={product_media} />
-
           </div>
 
           <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -117,10 +118,8 @@ const Product = async (params: iProps) => {
                 {/* <p className="text-sm text-gray-600">{product.details}</p> */}
               </div>
             </div>
-          <AddtocartButtonList vendor_product={vendor_product} />
-
+            <AddtocartButtonList vendor_product={vendor_product} />
           </div>
-
         </div>
       )}
     </div>
